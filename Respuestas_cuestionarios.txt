@@ -1,0 +1,59 @@
+
+ Preguntas orientadoras 
+    1. Describa brevemente los diferentes perfiles de familias de microprocesadores/microcontroladores de ARM. Explique alguna de sus diferencias características. 
+Cortex M 
+    1. Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y M4. 
+    2. ¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique 
+    3. ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura? 
+    4. ¿Cómo es el mapa de memoria de la familia? 
+    5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP? 
+    6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no priviligiado y nuevamente a privilegiado. 
+    7. ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo 
+    8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo 
+    9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault). 
+    10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno? 
+    11. Describa la secuencia de reset del microprocesador. 
+    12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos? 
+    13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo 
+    14. ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta? 
+    15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo 
+    17. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante? 
+    16. Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival. 
+    17. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos? 
+    18. ¿Qué funciones cumple la unidad de protección de memoria (MPU)? 
+    19. ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las regiones definidas? 
+    20. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo 
+    21. ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido. 
+ISA 
+    1. ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo 
+    2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo 
+    3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits. 
+    4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados? 
+    5. ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.
+
+Respuestas
+
+Preguntas orientadoras
+
+1.	ARM posee tres familias diferentes de Microprocesadores:
+        a.	Cortex A
+        b.	Cortex R
+        c.	Cortex M
+    La diferencia entre las familias se basa básicamente en la utilidad que se les da y por ende, las características y especificaciones de cada una.
+    Cortex A esta orientado a Aplicaciones y se encuentran en el mundo de las computadoras. Este tipo de procesador permite correr un sistema operativo que no sea de tiempo real, es decir, un sistema operativo “menos” determinístico. En general no posee periféricos propios o definidos y su latencia es mayor que la de las demás familias. Un ejemplo de esto seria los smartphones: si bien se busca una latencia baja, esta no es critica y a su vez el SO permite reasignar memoria de las diferentes aplicaciones sin afectar la estabilidad del mismo.
+    Cortex R esta orientado al Real Time. Tienen una baja latencia y alta capacidad de procesamiento. Se utiliza principalmente en sistemas críticos, donde un milisegundo mas o menos pueden determinar entre la vida o la muerte. Por ejemplo, sistema de airbags de los automóviles.
+    Cortex M esta orientado a sistemas embebidos. Son procesadores de consumo masivo y de gran capacidad de código (compactos). Esta familia se divide en Cortex M0/0+ y M3/4/7. Los primeros se caracterizan por ser de bajo consumo y costo, en cambio, los segundos permiten una mayor performance, pero a mayor consumo. Esta familia incorpora periféricos. Tanto Cortex M como Cortex R son admiten SO en real time, por lo que son determinísticos.
+
+Cortex M
+
+1.	Como ya se menciono en la respuesta anterior, existen dos subfamilias de Cortex M:
+    a.	M0:
+        •	Poseen arquitectura Von Neumann (necesita menos recursos) y son ARMv6. No poseen cache ni TCM y tampoco admiten MPU. De manera opcional poseen Bit-Banding y SysTick timer.
+        •	No siempre admiten Thumb-2.
+        •	No poseen Hardware divide, aritmética saturada, extensión DSP ni unidad de punto flotante.
+    b.	M3/4: 
+        •	Poseen arquitectura Harvard (mayores recursos) y son ARMv7. Poseen SysTick timer. Bit-Banding es opcional al igual que la unidad de protección de memoria. M4 tiene la posibilidad de incorporar memoria cache.
+        •	Admite Thumb-2
+        •	Poseen hardware divide y admiten aritmética saturada. M4 tiene extensión DSP y de manera opcional FPU.
+
+2.	Thumb admite mayor densidad de código ya que permite utilizar instrucciones de 16bits en arquitecturas de 32bits. Esto significa que en 32 bits se puede “almacenar” dos instrucciones de 16 bits. Así ahorramos memoria
