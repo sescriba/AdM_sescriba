@@ -57,3 +57,27 @@ Cortex M
         •	Poseen hardware divide y admiten aritmética saturada. M4 tiene extensión DSP y de manera opcional FPU.
 
 2.	Thumb admite mayor densidad de código ya que permite utilizar instrucciones de 16bits en arquitecturas de 32bits. Esto significa que en 32 bits se puede “almacenar” dos instrucciones de 16 bits. Así ahorramos memoria
+3.  Load/Store es un tipo de arquitectura que permite continuar con el flujo del pipeline sin necesidad de agregar un ciclo de reloj extra (a la instruccion) para buscar los datos en memoria. Asi Load/Store son las unicas instrucciones que tienen acceso a memoria, permitiendo obtener/almacenar datos en SRAM y al ser instrucciones del tipo RISC se addicionan al flujo del pipeline sin romper el mismo.
+    Las instrucciones SISC no poseen este tipo de instrucciones ya que, al disponer de instrucciones complejas, es la propia instruccion quien se encarga de buscar/amacenar datos en memoria.
+4.  El Mapa de memoria de los Cortex M3/M4 consiste en una memoria plana de 4GB ordenados de la siguiente manera:
+        System
+        Private peripherals BUS- External
+        Private peripherals BUS- Internal
+        External Device
+        External RAM
+        Peripherals
+        SRAM
+        Code
+5.  No lo vimos me parece. Pregutar en clases.
+6.  Cortex dispone de dos modos de trabajo:
+        - Thread Mode
+        - Handler Mode
+    Dentro del primero tenemos dos modos de privilegios:
+        - Con privilegios: acceso a perifericos, memoria, entre otros
+        - Sin privilegios: sin acceso a perifericos, etc
+    De manera unidireccional se puede pasar del modo privilegiado al modo sin privilegios, pero no en sentido contrario
+    Por otro lado, cuando sucede un evento (interrupcion) el microprocesador pasa a modo Handler donde siempre tiene privilegios. Cuando termina la rutina de interrupcion, se vuelve al mode Thread, con los privilegios que se poseeian antes de saltar al ISR.
+    Si se esta en modo sin privilegios, y se los quiere recuperar, el unico camino es saltar al modo Handler, (siempre con privilegios), cambiar el bit que representa estos niveles y retornar al modo Thread. Alli se recuperan los privilegios.
+    Un ejemplo de este proceso es cuando el OS posee privilegios, y llama a una tarea de usuario, donde le quita los privilegios por ejemplo para que el usuario no altere los perifericos. Luego Para recuperar los privilegios, se debe llamar a una ISR por software que resetee el bit de privilegios para que luego se pueda volver a tener los privilegios previos.
+    
+
