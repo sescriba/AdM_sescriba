@@ -79,5 +79,8 @@ Cortex M
     Por otro lado, cuando sucede un evento (interrupcion) el microprocesador pasa a modo Handler donde siempre tiene privilegios. Cuando termina la rutina de interrupcion, se vuelve al mode Thread, con los privilegios que se poseeian antes de saltar al ISR.
     Si se esta en modo sin privilegios, y se los quiere recuperar, el unico camino es saltar al modo Handler, (siempre con privilegios), cambiar el bit que representa estos niveles y retornar al modo Thread. Alli se recuperan los privilegios.
     Un ejemplo de este proceso es cuando el OS posee privilegios, y llama a una tarea de usuario, donde le quita los privilegios por ejemplo para que el usuario no altere los perifericos. Luego Para recuperar los privilegios, se debe llamar a una ISR por software que resetee el bit de privilegios para que luego se pueda volver a tener los privilegios previos.
-    
-
+7. Registro ortogonal: es cuando cualquier tipo de instrucciones puede usar todos los modos de direccionamientos. De esta forma, el tipo de instruccion y el modo de direccionamiento varian independientemente. No me quedo claro a que se refiere. Preguntar en clases    
+8. No lo vimos aun.
+9. No lo vimos aun.
+10. Stack: es una parte de la memoria SRAM donde se almacenan palabras (32 bits). El stack tiene una estructura del tipo LIFO (last input, first output) y se utilizan las instruccion POP and PUSH para sacar o insertar palabras respectivamente. Para el caso de las fuciones el stack almacena una palabra con la poscion de memoria de codigo desde donde se salto.
+    Cuando una funcion llama a otra funcion, se almacena la posicion de memoria desde donde se salto en el LR (link register) para luego poder regresar. Cuando esta funcion salta a otra funcion mas (3er nivel de salto), el LR se almacena en el stack y la nueva posicion de memoria se almacena en el LR.
