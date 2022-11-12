@@ -137,6 +137,21 @@ void productoEscalar32 (uint32_t * vectorIn, uint32_t * vectorOut, uint32_t long
 	}
 }
 
+void productoEscalar16 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar){
+	uint32_t i = 0;
+	for(i = 0; i < longitud; i++){
+		vectorOut[i] = vectorIn[i] * escalar;
+	}
+}
+
+void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar){
+	uint32_t i = 0;
+	for(i = 0; i < longitud; i++){
+		vectorOut[i] = vectorIn[i] * escalar;
+		if(vectorOut[i] > 0xFFF) vectorOut[i] = 0xFFF;
+	}
+}
+
 /**
   * @brief  The application entry point.
   * @retval int
