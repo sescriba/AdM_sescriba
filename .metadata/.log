@@ -61,3 +61,48 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-11-12 17:09:21.202
 !MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2022-11-13 09:47:27.968 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-11-13 09:47:43.084
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-11-13 09:47:43.218
+!MESSAGE Log4j initialized with config file D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-11-13 09:47:58.284
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2022-11-24 19:06:55.698 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-11-24 19:07:01.526
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-11-24 19:07:01.634
+!MESSAGE Log4j initialized with config file D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-11-24 19:07:14.889
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2022-11-24 19:45:55.529 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-11-24 19:46:00.849
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-11-24 19:46:00.916
+!MESSAGE Log4j initialized with config file D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-11-24 19:46:12.647
+!MESSAGE Started RMI Server, listening on port 41337

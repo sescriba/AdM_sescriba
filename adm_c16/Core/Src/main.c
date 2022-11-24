@@ -61,6 +61,9 @@ static void MX_GPIO_Init(void);
 static void MX_ETH_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
+void asm_zeros (uint32_t * vector, uint32_t longitud);   // Agregar esto
+void asm_escalar32 (uint32_t * vectorIn, uint32_t * vectorOut, uint32_t longitud, uint32_t escalar);
+void asm_escalar16 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint32_t escalar);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -187,6 +190,13 @@ int main(void)
   PrivilegiosSVC ();
 
   const uint32_t Resultado = asm_sum (5, 3);
+  uint32_t vectorin[4] = { 4, 5, 6, 7 };    // Agregar vector de prueba
+  uint32_t vectorout[4] = { 0,0,0,0 };    // Agregar vector de prueba
+  uint16_t vectorin16[4] = { 4, 5, 6, 7 };    // Agregar vector de prueba
+  uint16_t vectorout16[4] = { 0,0,0,0 };    // Agregar vector de prueba
+  asm_zeros (vectorin, 4);                  // Agregar llamado a función
+  asm_escalar32(vectorin, vectorout, 4, 10);
+  asm_escalar16(vectorin16, vectorout16, 4, 10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
