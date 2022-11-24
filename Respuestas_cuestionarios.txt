@@ -92,3 +92,8 @@ Cortex M
 12. No lo vimos aun.
 13. Las prioridades de las interrupciones van desde -3 a 239, donde el valor numerico mas bajo significa la mayor prioridad. Las prioridades -3, -2 y -1 estan reservadas para las excepciones mas importantes (reset, NMI y hardfault).
 14. CMISIS es un estandar. Basicamente se corresponde a una capa de abstraccion de hardware y posee funcionalidad de debuger. Utilizando estas especificaciones, se puede codificar un software que sea estandarizado para todos los hardware que soporten CMSIS permitiendo asi no tener que cambiar el codigo fuente de acuerdo al fabricante del microprocesador. El mismo es provisto por ARM.
+
+ISA
+
+1. Los sufijos permiten variaciones a una instruccion. Por ejemplo las instrucciones de manejo de memoria, el sufijo indica el tipo de dato que se va a almacenar o tomar. LDRB carga un registro de 8 bits, mientras que STRSH almacena 16bits signados. Tambien existen sufijos condicionales, que al incluirse en una instruccion, ejecutan la misma si se cumple la condicion
+2. Al incluir el sufijo S, indica que actualiza las variables de estado (N, Q, Z, etc)
