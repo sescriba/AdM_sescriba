@@ -97,3 +97,5 @@ ISA
 
 1. Los sufijos permiten variaciones a una instruccion. Por ejemplo las instrucciones de manejo de memoria, el sufijo indica el tipo de dato que se va a almacenar o tomar. LDRB carga un registro de 8 bits, mientras que STRSH almacena 16bits signados. Tambien existen sufijos condicionales, que al incluirse en una instruccion, ejecutan la misma si se cumple la condicion
 2. Al incluir el sufijo S, indica que actualiza las variables de estado (N, Q, Z, etc)
+3. No vimos aun.
+4. La interaccion entre C y ASM se realiza mediante la parametrizacion de los registros R0 a R3. Es decir que desde C se pueden enviar hasta 4 parametros que se almacenaran automaticamente en los registros R0, R1, R2 y R3 del micro. De igual manera, el retorno se realiza mediante el registro R0. Estos registros no deben ser guardados en la pila ya que se almacenan automaticamente. Sin embargo los demas registros que se deseen utilizar, si es necesario hacer PUSH and POP al stack para guardar su valor originar y luego retomarlo correctamente.
