@@ -155,21 +155,6 @@ void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t long
 	}
 }
 
-void filter (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud){
-	uint32_t i = 0;
-	uint32_t j = 0;
-	uint32_t prom = 0;
-	for(i = 0; i < longitud; i++){
-		for(j = -5; j < 5; j++){
-			if((j+i) < 0 ) prom += 0;
-			else if((j+i) > longitud) prom += 0;
-			else prom += vectorIn[j];
-			prom /= 5;
-		}
-		vectorOut[i] = prom;
-	}
-}
-
 /**
   * @brief  The application entry point.
   * @retval int
