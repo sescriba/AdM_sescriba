@@ -111,3 +111,92 @@
 	  	pop {r4}			  @ recuperar r4 del stack
 	    bx lr                 @ La instrucción de salto no se ejecutó porque Z == 1, volvemos a quién nos llamó.
 
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint32_t escalar)
+@
+@ Parametros recibidos:
+@   r0: dirección de memoria de inicio del vector IN
+@   r1: dirección de memoria de inicio del vector OUT
+@   r2: longitud
+@   r3: escalar
+.thumb_func               @ Se avisa al emsablador que esta es una funcion
+    asm_escalar12:            @ Etiqueta/nombre de la función.
+        push {r4,r5}			  @ salvar el contexto de r4 en el stack
+        mov r5, #4095
+        asm_escalar12_bucle:  @ Etiqueta de comienzo de bucle.
+        ldrh r4, [r0]		  @ Guarda elemento del venctor IN en r4
+        muls r4, r3, r4		  @ Multiplica r4*r3 donde r3 es el escalar
+        usat r4, 12, r4		  @ check si saturo a 12 bits
+	    strh r4, [r1]         @ Asigna r4 a la palabra en dirección r1 (vector OUT).
+	    add r0, 4             @ Pasa a la siguiente palabra/elemento en vector IN.
+	    add r1, 4			  @ Pasa a la siguiente palabra/elemento en vector OUT.
+	    subs r2, 1            @ Resta 1 a la cantidad de elementos y actualiza flags de estado del procesador. En particular, estamos interesados en el flag Z.
+	    bne asm_escalar12_bucle@ La instrucción se ejecuta mientras el resultado de r1 - 1 no sea cero (Z == 0).
+	  	pop {r4}			  @ recuperar r4 del stack
+	    bx lr                 @ La instrucción de salto no se ejecutó porque Z == 1, volvemos a quién nos llamó.
+
+
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void filtroVentana10 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud)
+@
+@ Parametros recibidos:
+@   r0: dirección de memoria de inicio del vector IN
+@   r1: dirección de memoria de inicio del vector OUT
+@   r2: longitud
+.thumb_func               @ Se avisa al emsablador que esta es una funcion
+    filtroVentana10:            @ Etiqueta/nombre de la función.
+        push {r3-r8}			  @ salvar el contexto de r4 en el stack
+        mov r3, r0
+        lsl r4, r2, 2
+        filtroVentana10_bucle:  @ Etiqueta de comienzo de bucle.
+	        mov r5, #10
+	        	bucle2:
+		        adds r6, r3, r5
+		        subs r6,r4,r6
+		      	ldr r6, [r0]
+		        it pl
+		        addpl r7, r6
+
+		        subs r6, r3, r5
+		        subs r6, r3, r6
+		        ldr r6, [r0]
+		        it pl
+		        addpl r7,r6
+	        subs r5,1
+	        bne bucle2
+	    mov r8, #10
+	    udiv r7,r7,r8
+	    strh r7, [r1]
+	    add r0, 2             @ Pasa a la siguiente palabra/elemento en vector IN.
+	    add r1, 2			  @ Pasa a la siguiente palabra/elemento en vector OUT.
+	    subs r2, 1            @ Resta 1 a la cantidad de elementos y actualiza flags de estado del procesador. En particular, estamos interesados en el flag Z.
+	    bne filtroVentana10_bucle@ La instrucción se ejecuta mientras el resultado de r1 - 1 no sea cero (Z == 0).
+	  	pop {r3-r8}			  @ recuperar r4 del stack
+	    bx lr                 @ La instrucción de salto no se ejecutó porque Z == 1, volvemos a quién nos llamó.
+
+
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud)
+@
+@ Parametros recibidos:
+@   r0: dirección de memoria de inicio del vector IN
+@   r1: dirección de memoria de inicio del vector OUT
+@   r2: longitud
+.thumb_func               @ Se avisa al emsablador que esta es una funcion
+    asm_pack16:            @ Etiqueta/nombre de la función.
+        push {r4-r5}			  @ salvar el contexto de r4 en el stack
+        asm_pack16_bucle:  @ Etiqueta de comienzo de bucle.
+        ldrh r4, [r0]		  @ Guarda elemento del venctor IN en r4
+        lsr r4, 4		  	  @ desplazo 4 a la derecha (parte alta)
+        mov r5,#0xffff
+        and r5,r4,r5		  @ hago and
+	    strh r5, [r1]         @ Asigna r5 a la palabra en dirección r1 (vector OUT).
+	    add r0, 4             @ Pasa a la siguiente palabra/elemento en vector IN.
+	    add r1, 4			  @ Pasa a la siguiente palabra/elemento en vector OUT.
+	    subs r2, 1            @ Resta 1 a la cantidad de elementos y actualiza flags de estado del procesador. En particular, estamos interesados en el flag Z.
+	    bne asm_pack16_bucle@ La instrucción se ejecuta mientras el resultado de r1 - 1 no sea cero (Z == 0).
+	  	pop {r4-r5}			  @ recuperar r4 del stack
+	    bx lr                 @ La instrucción de salto no se ejecutó porque Z == 1, volvemos a quién nos llamó.

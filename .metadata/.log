@@ -205,3 +205,79 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data D:\Documents\CES
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-12-03 09:46:09.040
 !MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2022-12-04 10:21:20.220 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-12-04 10:21:42.372
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-12-04 10:21:42.502
+!MESSAGE Log4j initialized with config file D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba\.metadata\.log4j.xml
+
+!ENTRY org.eclipse.ui.workbench 4 2 2022-12-04 10:21:58.954
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.ui.workbench".
+!STACK 0
+org.eclipse.core.runtime.AssertionFailedException: assertion failed: The application has not been initialized.
+	at org.eclipse.core.runtime.Assert.isTrue(Assert.java:113)
+	at org.eclipse.core.internal.runtime.InternalPlatform.assertInitialized(InternalPlatform.java:139)
+	at org.eclipse.core.internal.runtime.InternalPlatform.getConfigurationLocation(InternalPlatform.java:270)
+	at org.eclipse.core.runtime.Platform.getConfigurationLocation(Platform.java:1339)
+	at com.st.stm32cube.ide.mcu.analytics.MCUAnalyticsPlugin.getPluginConfigurationLocation(MCUAnalyticsPlugin.java:64)
+	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsStartup.getDialogSettingsFile(MCUAnalyticsStartup.java:158)
+	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsStartup.getDialogSettings(MCUAnalyticsStartup.java:140)
+	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsStartup.getAskAgainEndUserAgreement(MCUAnalyticsStartup.java:114)
+	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsStartup.earlyStartup(MCUAnalyticsStartup.java:54)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:79)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:55)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.Workbench$40.run(Workbench.java:2667)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 4 2 2022-12-04 10:21:58.954
+!MESSAGE An internal error occurred during: "Executing the early startup extensions".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.core.internal.runtime.InternalPlatform.lambda$11(InternalPlatform.java:366)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1737)
+	at org.eclipse.core.internal.runtime.InternalPlatform.getLog(InternalPlatform.java:361)
+	at org.eclipse.core.runtime.Plugin.getLog(Plugin.java:237)
+	at org.eclipse.ui.internal.WorkbenchPlugin.log(WorkbenchPlugin.java:743)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.handleException(EarlyStartupRunnable.java:71)
+	at org.eclipse.core.runtime.SafeRunner.handleException(SafeRunner.java:83)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.ui.internal.Workbench$40.run(Workbench.java:2667)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2022-12-08 17:06:54.122 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-12-08 17:07:00.175
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-12-08 17:07:00.291
+!MESSAGE Log4j initialized with config file D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-12-08 17:07:13.179
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2022-12-09 08:38:29.770 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-12-09 08:38:36.185
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-12-09 08:38:36.297
+!MESSAGE Log4j initialized with config file D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-12-09 08:38:50.210
+!MESSAGE Started RMI Server, listening on port 41337

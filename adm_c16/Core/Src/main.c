@@ -155,7 +155,7 @@ void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t long
 	}
 }
 
-void filter (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud){
+void filtroVentana10 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud){
 	uint32_t i = 0;
 	uint32_t j = 0;
 	uint32_t prom = 0;
@@ -168,6 +168,25 @@ void filter (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud){
 		}
 		vectorOut[i] = prom;
 	}
+}
+
+void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud){
+	uint32_t i = 0;
+
+	for(i = 0; i < longitud; i++){
+		vectorOut[i] = (vectorIn[i]>>16)&0xFFFF;
+	}
+}
+
+int32_t max (int32_t * vectorIn, uint32_t longitud){
+	uint32_t i = 0;
+	uint32_t posicion;
+
+	for(i = 0; i < longitud-1; i++){
+		if(vectorIn[i] > vectorIn[i+1]) posicion = i;
+		else posicion = i+1;
+	}
+	return i;
 }
 
 /**
