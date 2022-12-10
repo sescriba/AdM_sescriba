@@ -35,7 +35,7 @@ Respuestas
 
 Preguntas orientadoras
 
-1.	ARM posee tres familias diferentes de Microprocesadores:
+1. ARM posee tres familias diferentes de Microprocesadores:
         a.	Cortex A
         b.	Cortex R
         c.	Cortex M
@@ -46,7 +46,7 @@ Preguntas orientadoras
 
 Cortex M
 
-1.	Como ya se menciono en la respuesta anterior, existen dos subfamilias de Cortex M:
+1. Como ya se menciono en la respuesta anterior, existen dos subfamilias de Cortex M:
     a.	M0:
         •	Poseen arquitectura Von Neumann (necesita menos recursos) y son ARMv6. No poseen cache ni TCM y tampoco admiten MPU. De manera opcional poseen Bit-Banding y SysTick timer.
         •	No siempre admiten Thumb-2.
@@ -56,7 +56,7 @@ Cortex M
         •	Admite Thumb-2
         •	Poseen hardware divide y admiten aritmética saturada. M4 tiene extensión DSP y de manera opcional FPU.
 
-2.	Thumb admite mayor densidad de código ya que permite utilizar instrucciones de 16bits en arquitecturas de 32bits. Esto significa que en 32 bits se puede “almacenar” dos instrucciones de 16 bits. Así ahorramos memoria
+2. Thumb admite mayor densidad de código ya que permite utilizar instrucciones de 16bits en arquitecturas de 32bits. Esto significa que en 32 bits se puede “almacenar” dos instrucciones de 16 bits. Así ahorramos memoria
 3.  Load/Store es un tipo de arquitectura que permite continuar con el flujo del pipeline sin necesidad de agregar un ciclo de reloj extra (a la instruccion) para buscar los datos en memoria. Asi Load/Store son las unicas instrucciones que tienen acceso a memoria, permitiendo obtener/almacenar datos en SRAM y al ser instrucciones del tipo RISC se addicionan al flujo del pipeline sin romper el mismo.
     Las instrucciones SISC no poseen este tipo de instrucciones ya que, al disponer de instrucciones complejas, es la propia instruccion quien se encarga de buscar/amacenar datos en memoria.
 4.  El Mapa de memoria de los Cortex M3/M4 consiste en una memoria plana de 4GB ordenados de la siguiente manera:
@@ -81,7 +81,7 @@ Cortex M
     Un ejemplo de este proceso es cuando el OS posee privilegios, y llama a una tarea de usuario, donde le quita los privilegios por ejemplo para que el usuario no altere los perifericos. Luego Para recuperar los privilegios, se debe llamar a una ISR por software que resetee el bit de privilegios para que luego se pueda volver a tener los privilegios previos.
     El bit 0 del registro de control es quien posee la facultad para cambiar el modo de privilegio. Asi al setear este bit en 1, se pasa al modo no privilegiado y solo puede ser seteado a 0 desde el modo handler. Por ejemplo se puede llamar a una interrupcion por software que se encarge de modificar el modo de privilegio.
 7. Registro ortogonal: es cuando cualquier tipo de instrucciones puede usar todos los modos de direccionamientos. De esta forma, el tipo de instruccion y el modo de direccionamiento varian independientemente. No me quedo claro a que se refiere. Preguntar en clases    
-8. No lo vimos aun.
+8. Los bloques IT permiten ejecutar una instruccion u otra de acuerdo a una condicion. Estos bloques tienen la ventaja de consumir menos ciclos de reloj que un salto, siempre y cuenado la cantidad de instrucciones en el bloque no superen en tres.
 9. Las tres excepciones mas importantes son:
 	- Reset: posee la prioridad mas alta (-3) y permite el reinicio del sistema
 	- NMI: Interrupcion no enmascarable. Posee prioridad -2 y es la unica interrupcion que no puede ser desactivada. Es asi que, por ejemplo, en una tarea critica, este evento sera atendido a pesar de que los demas sean desativados.
@@ -99,3 +99,4 @@ ISA
 2. Al incluir el sufijo S, indica que actualiza las variables de estado (N, Q, Z, etc)
 3. No vimos aun.
 4. La interaccion entre C y ASM se realiza mediante la parametrizacion de los registros R0 a R3. Es decir que desde C se pueden enviar hasta 4 parametros que se almacenaran automaticamente en los registros R0, R1, R2 y R3 del micro. De igual manera, el retorno se realiza mediante el registro R0. Estos registros no deben ser guardados en la pila ya que se almacenan automaticamente. Sin embargo los demas registros que se deseen utilizar, si es necesario hacer PUSH and POP al stack para guardar su valor originar y luego retomarlo correctamente.
+5. Una instruccion SIMD permite paralilizar operaciones aritmeticas. Estas consisten en un registro de 32 bits que se divide en dos o cuatro, permitiendo almacenar dos variables de 16 bits o cuatro de 8. Lo importante de este concepto es entender que esas variables son independientes entre si. Por ejemplo SADD16 permite sumar dos variables de 16 bits en un solo ciclo de reloj.
