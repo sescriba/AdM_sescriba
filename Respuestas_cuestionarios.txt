@@ -17,7 +17,7 @@ Cortex M
     13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo 
     14. ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta? 
     15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo 
-    17. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante? 
+    15b. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante? 
     16. Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival. 
     17. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos? 
     18. ¿Qué funciones cumple la unidad de protección de memoria (MPU)? 
@@ -88,12 +88,18 @@ Cortex M
 	- Hardfault: posee prioridad -1. Al producirse un fault del sistema se genera este evento que sera atendido por el hardfault handler. 
 10. Stack: es una parte de la memoria SRAM donde se almacenan palabras (32 bits). El stack tiene una estructura del tipo LIFO (last input, first output) y se utilizan las instruccion POP and PUSH para sacar o insertar palabras respectivamente. Para el caso de las fuciones el stack almacena una palabra con la poscion de memoria de codigo desde donde se salto.
     Cuando una funcion llama a otra funcion, se almacena la posicion de memoria desde donde se salto en el LR (link register) para luego poder regresar. Cuando esta funcion salta a otra funcion mas (3er nivel de salto), el LR se almacena en el stack y la nueva posicion de memoria se almacena en el LR.
-11. No lo vimos aun.
+11. Se ejecuta cuando se energiza el procesador. Se lee la direccion 0x00 (MSP value), y carga el valor en el SP (inicializa el stack). Luego va a la direccion 0x4 y llama a esa secuencia. Todo esto lo realiza el micro y a partir de alli el programador puede controlar el programa. En el handle de reset se encuentran las instruciones de reset, donde se guardan los valores de inicio de las varaibles con un valor dado, se inicializan las variables en cero, se llama a SystemInit, entre otros.
 12. No lo vimos aun.
 13. Las prioridades de las interrupciones van desde -3 a 239, donde el valor numerico mas bajo significa la mayor prioridad. Las prioridades -3, -2 y -1 estan reservadas para las excepciones mas importantes (reset, NMI y hardfault).
 14. CMISIS es un estandar. Basicamente se corresponde a una capa de abstraccion de hardware y posee funcionalidad de debuger. Utilizando estas especificaciones, se puede codificar un software que sea estandarizado para todos los hardware que soporten CMSIS permitiendo asi no tener que cambiar el codigo fuente de acuerdo al fabricante del microprocesador. El mismo es provisto por ARM.
 15. Cuando ocurre un evento de interrupcion, se produce el proceso de stacking, donde se guardan un set de registros importantes en el stack. Se viene ejecutando la aplicacion en thread mode y ocurre el envento. Se ejecuta una secuencia de exceptcion y luego se el handler execution. Durante la secuencia de exepcion, en el bus de datos se produce el proceso de stacking, donde se guardan los registros y, en simultaneo, en el bus de instrucciones se produce ek fetching, donde se va cargando el pipline con las instrucciones de la ISR.
-17. Ademas de los registros que se guardan en el stack al manejar una interrupcion, tambien se guardan registros relativos al punto flotante y el FPSCR. Ademas, si se viene usando punto flotante en la aplicacion, se deja el espacio para guardar estos registros de ser el caso en el que el handle los utiliza.
+15b. Ademas de los registros que se guardan en el stack al manejar una interrupcion, tambien se guardan registros relativos al punto flotante y el FPSCR. Ademas, si se viene usando punto flotante en la aplicacion, se deja el espacio para guardar estos registros de ser el caso en el que el handle los utiliza.
+16. Tail chaining:
+		Ocurren dos interrupciones de igual prioridad. Se ejecuta la primera ISR y al finalizar, en lugar de volver al thread mode, se queda en handler mode y se empieza a ejecutar la interrupcion siguiente. De esta formar no es necesario realizar el stacking entre interrupciones.
+    Late arrival:
+		Se produce una interrupcion de baja prioridad. Si durante el proceso de stacking (y ANTES del vector fech) se produce otra interrupcion de mayor prioridad, se atendera a esta ultima postergando la de menor prioridad. Luego se de terminar esta ISR, se ejecuta la de menor prioridad. Es posible que se produzca un Tail Chaining.
+17. 
+
 ISA
 
 1. Los sufijos permiten variaciones a una instruccion. Por ejemplo las instrucciones de manejo de memoria, el sufijo indica el tipo de dato que se va a almacenar o tomar. LDRB carga un registro de 8 bits, mientras que STRSH almacena 16bits signados. Tambien existen sufijos condicionales, que al incluirse en una instruccion, ejecutan la misma si se cumple la condicion
