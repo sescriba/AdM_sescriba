@@ -180,13 +180,43 @@ void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud){
 
 int32_t max (int32_t * vectorIn, uint32_t longitud){
 	uint32_t i = 0;
-	uint32_t posicion;
+	uint32_t p;
 
 	for(i = 0; i < longitud-1; i++){
-		if(vectorIn[i] > vectorIn[i+1]) posicion = i;
-		else posicion = i+1;
+		if(vectorIn[i] > vectorIn[i+1]) p = i;
+		else p = i+1;
 	}
-	return i;
+	return p;
+}
+
+void downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N){
+	uint32_t i = 0;
+	for(i = 0; i < longitud; i++){
+		if(i%N) continue;
+		vectorOut[i] = vectorIn[i]/10;
+	}
+}
+void invertir (uint16_t * vector, uint32_t longitud){
+	uint32_t i = 0;
+	uint16_t *aux = NULL;
+	for(i = 0; i < longitud; i++){
+		aux[i] = vector[longitud-1-i];
+	}
+	for(i = 0; i < longitud; i++){
+		vector[i] = aux[i];
+	}
+}
+
+void corr (int16_t * vectorX, int16_t * vectorY, int16_t * vectorCorr, uint32_t longitud){
+	uint32_t i = 0;
+	uint32_t j = 0;
+
+	for(j = 0; j < longitud; j++){
+		for(i = 0; i < longitud; i++){
+			vectorCorr[j] += vectorX[i]*vectorY[i-j];
+		}
+	}
+
 }
 
 /**
