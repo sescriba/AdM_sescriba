@@ -92,7 +92,8 @@ Cortex M
 12. No lo vimos aun.
 13. Las prioridades de las interrupciones van desde -3 a 239, donde el valor numerico mas bajo significa la mayor prioridad. Las prioridades -3, -2 y -1 estan reservadas para las excepciones mas importantes (reset, NMI y hardfault).
 14. CMISIS es un estandar. Basicamente se corresponde a una capa de abstraccion de hardware y posee funcionalidad de debuger. Utilizando estas especificaciones, se puede codificar un software que sea estandarizado para todos los hardware que soporten CMSIS permitiendo asi no tener que cambiar el codigo fuente de acuerdo al fabricante del microprocesador. El mismo es provisto por ARM.
-
+15. Cuando ocurre un evento de interrupcion, se produce el proceso de stacking, donde se guardan un set de registros importantes en el stack. Se viene ejecutando la aplicacion en thread mode y ocurre el envento. Se ejecuta una secuencia de exceptcion y luego se el handler execution. Durante la secuencia de exepcion, en el bus de datos se produce el proceso de stacking, donde se guardan los registros y, en simultaneo, en el bus de instrucciones se produce ek fetching, donde se va cargando el pipline con las instrucciones de la ISR.
+17. Ademas de los registros que se guardan en el stack al manejar una interrupcion, tambien se guardan registros relativos al punto flotante y el FPSCR. Ademas, si se viene usando punto flotante en la aplicacion, se deja el espacio para guardar estos registros de ser el caso en el que el handle los utiliza.
 ISA
 
 1. Los sufijos permiten variaciones a una instruccion. Por ejemplo las instrucciones de manejo de memoria, el sufijo indica el tipo de dato que se va a almacenar o tomar. LDRB carga un registro de 8 bits, mientras que STRSH almacena 16bits signados. Tambien existen sufijos condicionales, que al incluirse en una instruccion, ejecutan la misma si se cumple la condicion
