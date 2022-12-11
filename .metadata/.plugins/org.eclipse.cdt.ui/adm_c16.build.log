@@ -1,6 +1,60 @@
-21:24:10 **** Incremental Build of configuration Debug for project adm_c16 ****
+21:59:26 **** Incremental Build of configuration Debug for project adm_c16 ****
 make -j8 all 
-arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:290:3: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  290 |   printf(Ciclos);
+      |   ^~~~~~
+../Core/Src/main.c:290:3: warning: incompatible implicit declaration of built-in function 'printf'
+../Core/Src/main.c:26:1: note: include '<stdio.h>' or provide a declaration of 'printf'
+   25 | #include "asm_func.h"
+  +++ |+#include <stdio.h>
+   26 | /* USER CODE END Includes */
+../Core/Src/main.c:290:10: warning: passing argument 1 of 'printf' makes pointer from integer without a cast [-Wint-conversion]
+  290 |   printf(Ciclos);
+      |          ^~~~~~
+      |          |
+      |          uint32_t {aka volatile long unsigned int}
+../Core/Src/main.c:290:10: note: expected 'const char *' but argument is of type 'uint32_t' {aka 'volatile long unsigned int'}
+../Core/Src/main.c:296:10: warning: passing argument 1 of 'printf' makes pointer from integer without a cast [-Wint-conversion]
+  296 |   printf(Ciclos);
+      |          ^~~~~~
+      |          |
+      |          uint32_t {aka volatile long unsigned int}
+../Core/Src/main.c:296:10: note: expected 'const char *' but argument is of type 'uint32_t' {aka 'volatile long unsigned int'}
+../Core/Src/main.c:303:10: warning: passing argument 1 of 'printf' makes pointer from integer without a cast [-Wint-conversion]
+  303 |   printf(Ciclos);
+      |          ^~~~~~
+      |          |
+      |          uint32_t {aka volatile long unsigned int}
+../Core/Src/main.c:303:10: note: expected 'const char *' but argument is of type 'uint32_t' {aka 'volatile long unsigned int'}
+../Core/Src/main.c:309:10: warning: passing argument 1 of 'printf' makes pointer from integer without a cast [-Wint-conversion]
+  309 |   printf(Ciclos);
+      |          ^~~~~~
+      |          |
+      |          uint32_t {aka volatile long unsigned int}
+../Core/Src/main.c:309:10: note: expected 'const char *' but argument is of type 'uint32_t' {aka 'volatile long unsigned int'}
+../Core/Src/main.c:316:10: warning: passing argument 1 of 'printf' makes pointer from integer without a cast [-Wint-conversion]
+  316 |   printf(Ciclos);
+      |          ^~~~~~
+      |          |
+      |          uint32_t {aka volatile long unsigned int}
+../Core/Src/main.c:316:10: note: expected 'const char *' but argument is of type 'uint32_t' {aka 'volatile long unsigned int'}
+../Core/Src/main.c:322:10: warning: passing argument 1 of 'printf' makes pointer from integer without a cast [-Wint-conversion]
+  322 |   printf(Ciclos);
+      |          ^~~~~~
+      |          |
+      |          uint32_t {aka volatile long unsigned int}
+../Core/Src/main.c:322:10: note: expected 'const char *' but argument is of type 'uint32_t' {aka 'volatile long unsigned int'}
+../Core/Src/main.c:328:10: warning: passing argument 1 of 'printf' makes pointer from integer without a cast [-Wint-conversion]
+  328 |   printf(Ciclos);
+      |          ^~~~~~
+      |          |
+      |          uint32_t {aka volatile long unsigned int}
+../Core/Src/main.c:328:10: note: expected 'const char *' but argument is of type 'uint32_t' {aka 'volatile long unsigned int'}
+../Core/Src/main.c:272:18: warning: unused variable 'Resultado' [-Wunused-variable]
+  272 |   const uint32_t Resultado = asm_sum (5, 3);
+      |                  ^~~~~~~~~
 arm-none-eabi-gcc -o "adm_c16.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba\adm_c16\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="adm_c16.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: adm_c16.elf
  
@@ -8,7 +62,7 @@ arm-none-eabi-size   adm_c16.elf
 arm-none-eabi-objdump -h -S  adm_c16.elf  > "adm_c16.list"
 arm-none-eabi-objcopy  -O binary  adm_c16.elf  "adm_c16.bin"
    text	   data	    bss	    dec	    hex	filename
-  13160	     20	   3492	  16672	   4120	adm_c16.elf
+  18948	    120	   3512	  22580	   5834	adm_c16.elf
 Finished building: default.size.stdout
  
 Finished building: adm_c16.bin
@@ -16,5 +70,5 @@ Finished building: adm_c16.bin
 Finished building: adm_c16.list
  
 
-21:24:11 Build Finished. 0 errors, 0 warnings. (took 1s.23ms)
+21:59:27 Build Finished. 0 errors, 10 warnings. (took 1s.244ms)
 

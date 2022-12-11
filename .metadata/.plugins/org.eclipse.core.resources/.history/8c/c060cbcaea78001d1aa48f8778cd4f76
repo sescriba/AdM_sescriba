@@ -64,26 +64,12 @@ static void MX_USB_OTG_FS_PCD_Init(void);
 void asm_zeros (uint32_t * vector, uint32_t longitud);   // Agregar esto
 void asm_escalar32 (uint32_t * vectorIn, uint32_t * vectorOut, uint32_t longitud, uint32_t escalar);
 void asm_escalar16 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint32_t escalar);
-void asm_escalar12(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
-void asm_filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud);
-void asm_pack16(int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
-int32_t asm_max(int32_t * vectorIn, uint32_t longitud);
-void asm_downsampleM(int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
-void asm_invertir(uint16_t * vector, uint32_t longitud);
-void asm_corr(int16_t * vectorX, int16_t * vectorY, int16_t * vectorCorr, uint32_t longitud);
-void asm_corrSIMD(int16_t * vectorX, int16_t * vectorY, int16_t * vectorCorr, uint32_t longitud);
-
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int __io_putchar (int ch)
-{
-    HAL_UART_Transmit (&huart3, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
-    return ch;
-}
 static void PrivilegiosSVC (void)
 {
     // Obtiene valor del registro de 32 bits del procesador llamado "control".
@@ -274,58 +260,16 @@ int main(void)
   uint32_t vectorout[4] = { 0,0,0,0 };    // Agregar vector de prueba
   uint16_t vectorin16[4] = { 4, 5, 6, 7 };    // Agregar vector de prueba
   uint16_t vectorout16[4] = { 0,0,0,0 };    // Agregar vector de prueba
-  int16_t vectorX16[4] = { 4, 5, 6, 7 };    // Agregar vector de prueba
-  int16_t vectorY16[4] = { 1,2,3,4 };    // Agregar vector de prueba
-  int16_t vectorcorr[4] = { 0,0,0,0 };    // Agregar vector de prueba
   asm_zeros (vectorin, 4);                  // Agregar llamado a función
   asm_escalar32(vectorin, vectorout, 4, 10);
   asm_escalar16(vectorin16, vectorout16, 4, 10);
 
-  volatile uint32_t Ciclos;
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  productoEscalar12 (vectorin16, vectorout16, 4, 10);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  asm_escalar12(vectorin16, vectorout16, 4, 10);
-  // Obtiene cantidad de ciclos que demoró la función
-   Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
 
   // Antes de la función a medir: contador de ciclos a cero
   DWT->CYCCNT = 0;
-  filtroVentana10 (vectorin16, vectorout16, 4);
+  //ADD function
   // Obtiene cantidad de ciclos que demoró la función
- Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  filtroVentana10(vectorin16, vectorout16, 4);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  corr (vectorX16, vectorY16, vectorcorr, 4);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  asm_corr (vectorX16, vectorY16, vectorcorr, 4);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  asm_corrSIMD (vectorX16, vectorY16, vectorcorr, 4);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
+  const volatile uint32_t Ciclos = DWT->CYCCNT;
   /* USER CODE END 2 */
 
   /* Infinite loop */

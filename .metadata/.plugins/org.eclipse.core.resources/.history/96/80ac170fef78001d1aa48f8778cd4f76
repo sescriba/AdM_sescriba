@@ -281,7 +281,7 @@ int main(void)
   asm_escalar32(vectorin, vectorout, 4, 10);
   asm_escalar16(vectorin16, vectorout16, 4, 10);
 
-  volatile uint32_t Ciclos;
+  const volatile uint32_t Ciclos;
   // Antes de la función a medir: contador de ciclos a cero
   DWT->CYCCNT = 0;
   productoEscalar12 (vectorin16, vectorout16, 4, 10);

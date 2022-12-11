@@ -274,57 +274,16 @@ int main(void)
   uint32_t vectorout[4] = { 0,0,0,0 };    // Agregar vector de prueba
   uint16_t vectorin16[4] = { 4, 5, 6, 7 };    // Agregar vector de prueba
   uint16_t vectorout16[4] = { 0,0,0,0 };    // Agregar vector de prueba
-  int16_t vectorX16[4] = { 4, 5, 6, 7 };    // Agregar vector de prueba
-  int16_t vectorY16[4] = { 1,2,3,4 };    // Agregar vector de prueba
-  int16_t vectorcorr[4] = { 0,0,0,0 };    // Agregar vector de prueba
   asm_zeros (vectorin, 4);                  // Agregar llamado a función
   asm_escalar32(vectorin, vectorout, 4, 10);
   asm_escalar16(vectorin16, vectorout16, 4, 10);
 
-  volatile uint32_t Ciclos;
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  productoEscalar12 (vectorin16, vectorout16, 4, 10);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  asm_escalar12(vectorin16, vectorout16, 4, 10);
-  // Obtiene cantidad de ciclos que demoró la función
-   Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
 
   // Antes de la función a medir: contador de ciclos a cero
   DWT->CYCCNT = 0;
-  filtroVentana10 (vectorin16, vectorout16, 4);
+  //ADD function
   // Obtiene cantidad de ciclos que demoró la función
- Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  filtroVentana10(vectorin16, vectorout16, 4);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  corr (vectorX16, vectorY16, vectorcorr, 4);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  asm_corr (vectorX16, vectorY16, vectorcorr, 4);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
-  printf(Ciclos);
-  // Antes de la función a medir: contador de ciclos a cero
-  DWT->CYCCNT = 0;
-  asm_corrSIMD (vectorX16, vectorY16, vectorcorr, 4);
-  // Obtiene cantidad de ciclos que demoró la función
-  Ciclos = DWT->CYCCNT;
+  const volatile uint32_t Ciclos = DWT->CYCCNT;
   printf(Ciclos);
   /* USER CODE END 2 */
 
