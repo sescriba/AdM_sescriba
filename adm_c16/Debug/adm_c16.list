@@ -216,12 +216,12 @@ Disassembly of section .text:
 	    bx lr                 @ La instrucción de salto no se ejecutó porque Z == 1, volvemos a quién nos llamó.
  8000252:	4770      	bx	lr
 
-08000254 <filtroVentana10>:
+08000254 <asm_filtroVentana10>:
 @   r0: dirección de memoria de inicio del vector IN
 @   r1: dirección de memoria de inicio del vector OUT
 @   r2: longitud
 .thumb_func               @ Se avisa al emsablador que esta es una funcion
-    filtroVentana10:            @ Etiqueta/nombre de la función.
+    asm_filtroVentana10:            @ Etiqueta/nombre de la función.
         push {r3-r8}			@ salvar el contexto de r3-r8 en el stack
  8000254:	e92d 01f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8}
         mov r3, r0				@ Copia la direccion de memoria del vector IN en r3
@@ -229,8 +229,8 @@ Disassembly of section .text:
         lsl r4, r2, 2			@ Multiplica por 2 la longitud (desplaza a la izq)
  800025a:	ea4f 0482 	mov.w	r4, r2, lsl #2
 
-0800025e <filtroVentana10_bucle>:
-        filtroVentana10_bucle:  @ Etiqueta de comienzo de bucle.
+0800025e <asm_filtroVentana10_bucle>:
+        asm_filtroVentana10_bucle:  @ Etiqueta de comienzo de bucle.
 	        mov r5, #10			@ Asigna #10 a r5
  800025e:	f04f 050a 	mov.w	r5, #10
 
@@ -273,8 +273,8 @@ Disassembly of section .text:
  8000288:	f101 0102 	add.w	r1, r1, #2
 		    subs r2, 1            @ Resta 1 a la cantidad de elementos y actualiza flags de estado del procesador. En particular, estamos interesados en el flag Z.
  800028c:	3a01      	subs	r2, #1
-		    bne filtroVentana10_bucle@ La instrucción se ejecuta mientras el resultado de r1 - 1 no sea cero (Z == 0).
- 800028e:	d1e6      	bne.n	800025e <filtroVentana10_bucle>
+		    bne asm_filtroVentana10_bucle@ La instrucción se ejecuta mientras el resultado de r1 - 1 no sea cero (Z == 0).
+ 800028e:	d1e6      	bne.n	800025e <asm_filtroVentana10_bucle>
 	  	pop {r3-r8}			  @ recuperar r3-r8 del stack
  8000290:	e8bd 01f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8}
 	    bx lr                 @ La instrucción de salto no se ejecutó porque Z == 1, volvemos a quién nos llamó.

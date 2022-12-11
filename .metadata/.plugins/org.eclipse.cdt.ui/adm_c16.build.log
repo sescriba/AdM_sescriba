@@ -1,4 +1,4 @@
-18:39:50 **** Incremental Build of configuration Debug for project adm_c16 ****
+21:24:10 **** Incremental Build of configuration Debug for project adm_c16 ****
 make -j8 all 
 arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Src/asm_func.d" -MT"Core/Src/asm_func.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/asm_func.o" "../Core/Src/asm_func.S"
 arm-none-eabi-gcc -o "adm_c16.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Documents\CESE\Arquitectura_Microcontroladores\AdM_sescriba\adm_c16\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="adm_c16.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -16,5 +16,5 @@ Finished building: adm_c16.bin
 Finished building: adm_c16.list
  
 
-18:39:51 Build Finished. 0 errors, 0 warnings. (took 849ms)
+21:24:11 Build Finished. 0 errors, 0 warnings. (took 1s.23ms)
 
