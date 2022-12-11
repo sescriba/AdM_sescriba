@@ -68,7 +68,7 @@ Cortex M
         Peripherals
         SRAM
         Code
-5.  No lo vimos me parece. Pregutar en clases.
+5.  Permite la conmutación por hardware de los punteros de pila para códigos corriendo en distintos niveles de privilegio.
 6.  Cortex dispone de dos modos de trabajo:
         - Thread Mode
         - Handler Mode
@@ -98,7 +98,11 @@ Cortex M
 		Ocurren dos interrupciones de igual prioridad. Se ejecuta la primera ISR y al finalizar, en lugar de volver al thread mode, se queda en handler mode y se empieza a ejecutar la interrupcion siguiente. De esta formar no es necesario realizar el stacking entre interrupciones.
     Late arrival:
 		Se produce una interrupcion de baja prioridad. Si durante el proceso de stacking (y ANTES del vector fech) se produce otra interrupcion de mayor prioridad, se atendera a esta ultima postergando la de menor prioridad. Luego se de terminar esta ISR, se ejecuta la de menor prioridad. Es posible que se produzca un Tail Chaining.
-17. 
+17. Systick es un contador decremental de 24bits, que es capaz de generar un interrupcion y estar sincronizado con el reloj del procesador.
+18. La MPU permite proteger el acceso a memoria, previniendo el acceso de la aplicacion a zonas de memoria criticas (stack, stack del OS), previene el acceso a perifericos o la ejecucion del programa desde zonas no permitidas. Si hay una violacion, se producen interrupciones de Hardfault o MemManage.
+19. Pueden configurarse un maximo de 8 regiones de memoria mas el background.
+20. PendSV es utilizada para agendar el cambio de contexto entre tareas del SO.
+21. SVC es utilizada para el llamado de funciones del kernel de SO y drivers.
 
 ISA
 
